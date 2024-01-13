@@ -68,11 +68,13 @@ def mscan(start_url, percent, pages, mode):
     print(f'*** page 1')
     driver.get(start_url)
     time.sleep(15)
+    coockies = driver.get_cookies()
     look_high_bonuses(driver, percent, mode)
 
     for page_num in range(2, pages + 1):
         print(f'*** page {page_num}')
         driver.get(start_url + 'page-' + str(page_num) + '/')
+        driver.add_cookie(coockies)
         time.sleep(2)
         look_high_bonuses(driver, percent, mode)
 
