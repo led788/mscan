@@ -68,13 +68,14 @@ def mscan(start_url, percent, pages, mode):
     print(f'*** page 1')
     driver.get(start_url)
     time.sleep(15)
-    coockies = driver.get_cookies()
+    coockie = {"displayName": "САНКТ-ПЕТЕРБУРГ", "kladrId": "7800000000000", "isDeliveryEnabled": True,
+               "geo": {"lat": 59.939095, "lon": 30.315868}, "id": "78"}
     look_high_bonuses(driver, percent, mode)
 
     for page_num in range(2, pages + 1):
         print(f'*** page {page_num}')
         driver.get(start_url + 'page-' + str(page_num) + '/')
-        driver.add_cookie(coockies)
+        driver.add_cookie(coockie)
         time.sleep(2)
         look_high_bonuses(driver, percent, mode)
 
