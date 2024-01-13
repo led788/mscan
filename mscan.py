@@ -67,7 +67,7 @@ def mscan(start_url, percent, pages, mode):
     print(f'Start url: {start_url}')
     print(f'*** page 1')
     driver.get(start_url)
-    time.sleep(2)
+    time.sleep(15)
     look_high_bonuses(driver, percent, mode)
 
     for page_num in range(2, pages + 1):
