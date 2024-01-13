@@ -66,16 +66,29 @@ def mscan(start_url, percent, pages, mode):
 
     print(f'Start url: {start_url}')
     print(f'*** page 1')
+    # coockie = {"displayName": "САНКТ-ПЕТЕРБУРГ", "kladrId": "7800000000000", "isDeliveryEnabled": True,
+    #            "geo": {"lat": 59.939095, "lon": 30.315868}, "id": "78"}
+    coockies = {
+        'region_info': '{"displayName":"САНКТ-ПЕТЕРБУРГ","kladrId":"7800000000000","isDeliveryEnabled":true,"geo":{"lat":59.939095,"lon":30.315868},"id":"78"}',
+        '_gpVisits': '{"isFirstVisitDomain":false,"idContainer":"10002472"}'}
     driver.get(start_url)
-    time.sleep(15)
-    coockie = {"displayName": "САНКТ-ПЕТЕРБУРГ", "kladrId": "7800000000000", "isDeliveryEnabled": True,
-               "geo": {"lat": 59.939095, "lon": 30.315868}, "id": "78"}
+
+    for key, value in coockies.items():
+        driver.add_cookie({'name': key, 'value': value})
+
+    time.sleep(2)
+    driver.refresh()
+    time.sleep(2)
+
     look_high_bonuses(driver, percent, mode)
 
     for page_num in range(2, pages + 1):
         print(f'*** page {page_num}')
         driver.get(start_url + 'page-' + str(page_num) + '/')
-        driver.add_cookie(coockie)
+
+        for key, value in coockies.items():
+            driver.add_cookie({'name': key, 'value': value})
+
         time.sleep(2)
         look_high_bonuses(driver, percent, mode)
 
