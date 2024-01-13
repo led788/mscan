@@ -71,7 +71,7 @@ def mscan(start_url, percent, pages, mode):
     coockies = {
         'region_info': '{"displayName":"САНКТ-ПЕТЕРБУРГ","kladrId":"7800000000000","isDeliveryEnabled":true,"geo":{"lat":59.939095,"lon":30.315868},"id":"78"}',
         '_gpVisits': '{"isFirstVisitDomain":false,"idContainer":"10002472"}'}
-    driver.get(start_url)
+    driver.get(start_url + '#?filters={"4CB2C27EAAFC4EB39378C4B7487E6C9E":["1"]}')
 
     for key, value in coockies.items():
         driver.add_cookie({'name': key, 'value': value})
@@ -84,7 +84,7 @@ def mscan(start_url, percent, pages, mode):
 
     for page_num in range(2, pages + 1):
         print(f'*** page {page_num}')
-        driver.get(start_url + 'page-' + str(page_num) + '/')
+        driver.get(start_url + 'page-' + str(page_num) + '/' + '#?filters={"4CB2C27EAAFC4EB39378C4B7487E6C9E":["1"]}')
 
         for key, value in coockies.items():
             driver.add_cookie({'name': key, 'value': value})
